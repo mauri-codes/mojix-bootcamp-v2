@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      CodeUri: s3://maudeployments/71e7b2a46e5b23962d1573fd67b5d932
+      Role: !GetAtt MyRole.Arn
+
+  MyRole:
+    Type: 
