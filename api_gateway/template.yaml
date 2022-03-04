@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  AddReservation:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          CINEMA_TABLE: !Ref CinemaTable
+      FunctionName: AddReservation
+      Handler: app.add_reservation
+      Runtime: python3.9
+      CodeUri: build
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName:
+              !Ref CinemaTable
+
+  DisplayShow:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          CINEMA_TABLE: !Ref CinemaTable
+      FunctionName: DisplayShow
+      Handler: app.display_show
+      Runtime: python3.9
+      CodeUri: build
+
+  DisplayMovie:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          CINEMA_TABLE: !Ref CinemaTable
+      FunctionName: DisplayMovie
+      Handler: app.display_movie
+      Runtime: python3.9
+      CodeUri: build
+
+  CinemaTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: cinema-table
+      AttributeDefinitions:
+        - 
+          AttributeName: "pk"
+          AttributeType: "S"
+        - 
+          AttributeName: "sk"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "pk"
+          KeyType: "HASH"
+        - 
+          AttributeName: "sk"
+          KeyType: "RANGE"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
