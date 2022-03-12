@@ -3,10 +3,13 @@ version: 0.2
 phases:
   install:
     commands:
+      - cd api_gateway
       - ./deploy.sh -i
   build:
     commands:
+      - cd api_gateway
       - ./deploy.sh -b
   post_build:
     commands:
+      - cd api_gateway
       - ./deploy.sh -d
