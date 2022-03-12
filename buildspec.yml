@@ -3,13 +3,10 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo "install phase"
-  pre_build:
-    commands:
-      - echo "prebuild phase"
+      - ./deploy.sh -i
   build:
     commands:
-      - echo "build phase"
+      - ./deploy.sh -b
   post_build:
     commands:
-      - echo "postbuild phase"
+      - ./deploy.sh -d
