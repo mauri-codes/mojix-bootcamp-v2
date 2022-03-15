@@ -5,3 +5,4 @@ phases:
     commands:
       - cd api_gateway
       - ./deploy.sh -d
+      - echo "1"
